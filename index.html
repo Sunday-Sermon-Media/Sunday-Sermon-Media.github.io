@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Sunday Sermon Media helps small churches turn Sunday sermons into full videos, reels, and a simple website. Suggested $80/month or $40 small-church rate. Gospel first.">
 <title>Sunday Sermon Media | Help for Small Churches</title>
+<script>
+  document.documentElement.setAttribute("data-mode", location.hash === "#business" ? "business" : "church");
+  if (location.hash === "#business") document.title = "Small Business Media | Sunday Sermon Media";
+</script>
 <style>
   :root {
     --navy: #1a365d;
@@ -14,9 +18,13 @@
     --muted: #718096;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); line-height: 1.6; background: var(--cream); }
+  body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); line-height: 1.6; background: var(--cream); transition: opacity 0.35s ease; }
+  body.is-fading { opacity: 0; }
   header { background: var(--navy); color: white; padding: 1.2rem 5%; text-align: center; }
   header h1 { font-size: 1.6rem; }
+  .header-sub { font-size: 0.85rem; opacity: 0.85; margin-top: 0.2rem; }
+  .header-switch { display: inline-block; margin-top: 0.45rem; color: var(--gold); font-size: 0.85rem; font-weight: 600; text-decoration: none; }
+  .header-switch:hover { text-decoration: underline; }
   .hero { background: linear-gradient(135deg, var(--navy) 0%, #2a4a7a 100%); color: white; text-align: center; padding: 4rem 5% 3rem; }
   .hero h2 { font-size: 2.4rem; margin-bottom: 1rem; color: white; }
   .hero p { font-size: 1.15rem; max-width: 680px; margin: 0 auto 1.5rem; }
@@ -28,6 +36,8 @@
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
   .card { background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .card h3 { color: var(--navy); margin-bottom: 0.5rem; }
+  .card ul { margin: 0.75rem 0 0 1.15rem; }
+  .card li { margin-bottom: 0.35rem; }
   .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center; margin-top: 1.5rem; }
   .step { background: white; padding: 1.5rem; border-radius: 10px; }
   .step-num { display: inline-block; background: var(--gold); color: var(--navy); width: 2.2rem; height: 2.2rem; line-height: 2.2rem; border-radius: 50%; font-weight: 700; margin-bottom: 0.5rem; }
@@ -42,17 +52,37 @@
   footer { background: var(--navy); color: white; text-align: center; padding: 2rem 5%; font-size: 0.9rem; }
   .btn { display: inline-block; background: var(--gold); color: var(--navy); padding: 0.8rem 1.6rem; border-radius: 6px; font-weight: 600; margin-top: 1rem; text-decoration: none; }
   .btn:hover { background: #d4af37; }
+  .btn-outline { display: inline-block; background: transparent; border: 2px solid var(--gold); color: var(--navy); padding: 0.45rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; margin-top: 0.7rem; text-decoration: none; cursor: pointer; font-family: inherit; }
+  .btn-outline:hover { background: rgba(201,162,39,0.15); }
+  .hero .btn-outline { color: white; }
+  .callout { max-width: 640px; margin: 2rem auto 0; padding: 1rem 1.2rem; text-align: center; border: 1px solid rgba(26,54,93,0.15); border-radius: 8px; background: var(--cream); }
+  .callout h3 { color: var(--navy); font-size: 1.05rem; margin-bottom: 0.3rem; }
+  .callout p { color: var(--muted); font-size: 0.95rem; margin: 0 auto; max-width: 560px; }
+  .callout-hero { margin: 2rem auto 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(201,162,39,0.45); }
+  .callout-hero h3 { color: var(--gold); }
+  .callout-hero p { color: #f8f5f0; font-size: 0.95rem; }
+  html:not([data-mode="business"]) .biz-only { display: none !important; }
+  html[data-mode="business"] .church-only { display: none !important; }
   @media (max-width: 600px) {
     .hero h2 { font-size: 1.9rem; }
+    .hero { padding: 2.5rem 5% 2.25rem; }
+    .btn { margin: 0.4rem 0.25rem 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body { transition: none; }
   }
 </style>
 </head>
-<body>
+<body data-mode="church">
 <header>
-  <h1>Sunday Sermon Media</h1>
+  <h1 class="church-only">Sunday Sermon Media</h1>
+  <h1 class="biz-only">Small Business Media</h1>
+  <p class="header-sub biz-only">from Sunday Sermon Media</p>
+  <a class="header-switch church-only" href="#business">For local businesses</a>
+  <a class="header-switch biz-only" href="#church">For churches</a>
 </header>
 
-<section class="hero">
+<section class="hero church-only">
   <h2>Helping Small Churches Share the Gospel Online</h2>
   <p>We turn your Sunday sermons into ready-to-post videos, reels, and a simple website so more people can hear the Word.</p>
   <p style="font-weight:600;">Serving Nevada, MO and nearby towns. Most small churches start at $40 a month, and your first month is free.</p>
@@ -61,9 +91,26 @@
     “How then shall they call on him in whom they have not believed? and how shall they believe in him of whom they have not heard? and how shall they hear without a preacher?”
     <cite>Romans 10:14 (KJV)</cite>
   </blockquote>
+  <div class="callout callout-hero">
+    <h3>Run a local business?</h3>
+    <p>We'll keep your business in front of customers too: a simple website, daily posts and reels.</p>
+    <a class="btn-outline" href="#business">See Small Business Media</a>
+  </div>
 </section>
 
-<section>
+<section class="hero biz-only">
+  <h2>We'll Keep Your Business in Front of Customers</h2>
+  <p>A simple website, daily posts and reels, made from photos and video you send.</p>
+  <p style="font-weight:600;">Serving Nevada, MO and nearby towns. First month free on every plan.</p>
+  <p><a class="btn" href="tel:+14174480176">Call to talk: (417) 448-0176</a> <a class="btn" href="mailto:gospelsharepackage@gmail.com">Email us</a></p>
+  <div class="callout callout-hero">
+    <h3>Looking for church media?</h3>
+    <p>We also help small churches turn Sunday sermons into videos, reels and a simple website.</p>
+    <a class="btn-outline" href="#church">See Church Media</a>
+  </div>
+</section>
+
+<section class="church-only">
   <h2>How It Works</h2>
   <div class="steps">
     <div class="step">
@@ -84,7 +131,28 @@
   </div>
 </section>
 
-<section>
+<section class="biz-only">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Send photos and video</h3>
+      <p>Phone photos or a quick walkthrough of your business is enough to get started.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>We build the site and posts</h3>
+      <p>A simple one-page website, plus the Facebook posts and reels in your plan.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>We keep you in front of customers</h3>
+      <p>Your first month is free, so you can see the work before you pay anything.</p>
+    </div>
+  </div>
+</section>
+
+<section class="church-only">
   <h2>What You Get Each Month</h2>
   <div class="grid">
     <div class="card">
@@ -92,7 +160,7 @@
       <p>Your livestream or recording is trimmed to the sermon and given a clear title and scripture. We deliver the finished video ready for you to post on YouTube and Facebook. Posting for you is available as an optional add-on.</p>
     </div>
     <div class="card">
-      <h3>Reels & Shorts</h3>
+      <h3>Reels &amp; Shorts</h3>
       <p>4–8 vertical clips (15–60 seconds) with captions and hook titles, ready for TikTok, Facebook Reels, and YouTube Shorts.</p>
     </div>
     <div class="card">
@@ -106,7 +174,30 @@
   </div>
 </section>
 
-<div class="full-width">
+<section class="biz-only">
+  <h2>What You Get</h2>
+  <p class="lead">Everything is made from photos and video you send. No fancy shoot required.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Simple Website</h3>
+      <p>A clean one-page site for your business, with updates when you need them on the Growth and Full plans.</p>
+    </div>
+    <div class="card">
+      <h3>Facebook Posts</h3>
+      <p>Regular posts that keep your name in front of local customers — three a week on Starter, or daily on Growth and Full.</p>
+    </div>
+    <div class="card">
+      <h3>Reels</h3>
+      <p>Short videos from the photos and clips you send. Two a month on Growth, or one every week on Full.</p>
+    </div>
+    <div class="card">
+      <h3>A Monthly Report</h3>
+      <p>On the Full plan, a short monthly note on how your posts did, so you can see what's working.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-width church-only">
   <section>
     <h2>Pricing</h2>
     <p class="lead"><strong>Your first month is free.</strong> Send us one recent sermon and we'll make it for you, so you can see the work before you pay anything. After that, no contract. Cancel anytime. Our number one priority is that the gospel is shared.</p>
@@ -123,10 +214,63 @@
         <p>Same package. Available for churches where $80 is a stretch.</p>
       </div>
     </div>
+
+    <div class="callout">
+      <h3>Run a local business?</h3>
+      <p>We'll keep your business in front of customers too: a simple website, daily posts and reels.</p>
+      <a class="btn-outline" href="#business">See Small Business Media</a>
+    </div>
   </section>
 </div>
 
-<section id="sponsor">
+<div class="full-width biz-only">
+  <section>
+    <h2>Pricing</h2>
+    <p class="lead"><strong>Your first month is free</strong> on every plan. Content is made from photos and video you send. Serving Nevada, MO and nearby towns. No contract. Cancel anytime.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Starter</h3>
+        <p class="price">$40 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <ul>
+          <li>Simple one-page website</li>
+          <li>3 Facebook posts a week</li>
+          <li>First month free</li>
+        </ul>
+      </div>
+      <div class="card" style="border: 2px solid var(--gold);">
+        <h3>Growth</h3>
+        <p class="price">$80 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <ul>
+          <li>Website</li>
+          <li>Daily posts</li>
+          <li>2 reels a month</li>
+          <li>Site updates when needed</li>
+          <li>First month free</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Full</h3>
+        <p class="price">$120 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <ul>
+          <li>Website</li>
+          <li>Daily posts</li>
+          <li>A reel every week</li>
+          <li>Short monthly report on how posts did</li>
+          <li>First month free</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Looking for church media?</h3>
+      <p>We also help small churches share Sunday sermons online, with videos, reels and a simple website.</p>
+      <a class="btn-outline" href="#church">See Church Media</a>
+    </div>
+  </section>
+</div>
+
+<section id="sponsor" class="church-only">
   <h2>Sponsor a Church</h2>
   <p class="lead">If a church you care about could use help sharing the gospel online, you can cover their media for them.</p>
 
@@ -155,7 +299,7 @@
 </section>
 
 
-<section>
+<section class="church-only">
   <h2>Our Work: Cornerstone Baptist Church</h2>
   <p class="lead">Nevada, Missouri</p>
 
@@ -194,12 +338,17 @@
   <p style="text-align: center;"><a href="https://www.tiktok.com/@cornerstonebabtis0" target="_blank">TikTok: @cornerstonebabtis0</a></p>
 </section>
 
-<section>
+<section class="church-only">
   <h2>Who We Are</h2>
   <p class="lead">We do this kind of media and website work for small churches. The goal is to help congregations get gospel-sharing tools online without a high price tag.</p>
 </section>
 
-<section>
+<section class="biz-only">
+  <h2>Who We Are</h2>
+  <p class="lead">Sunday Sermon Media also helps local businesses in Nevada, MO and nearby towns stay in front of customers with a simple website, regular posts and reels — without a high price tag.</p>
+</section>
+
+<section class="church-only">
   <h2>FAQ</h2>
   <div class="grid">
     <div class="card">
@@ -221,7 +370,29 @@
   </div>
 </section>
 
-<section>
+<section class="biz-only">
+  <h2>FAQ</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>What do I need to send?</h3>
+      <p>Photos and short videos from your phone are enough, or a quick walkthrough of your business. We make the website, posts and reels from that.</p>
+    </div>
+    <div class="card">
+      <h3>Which platforms?</h3>
+      <p>A one-page website plus Facebook posts, and reels on the Growth and Full plans. If you also use Instagram or other accounts, we can talk about that.</p>
+    </div>
+    <div class="card">
+      <h3>Can I review posts first?</h3>
+      <p>Yes. Tell us if you want to approve posts before they go up. We can also adjust anything after it's posted.</p>
+    </div>
+    <div class="card">
+      <h3>How soon can we start?</h3>
+      <p>We can usually get a simple site and the first posts going within about a week. Your first month is free.</p>
+    </div>
+  </div>
+</section>
+
+<section class="church-only">
   <h2>Get Started</h2>
   <p class="lead">Interested in the Sunday Sermon Media package for your church? Reach out and we’ll talk about what would help most.</p>
   <div style="text-align: center;">
@@ -232,9 +403,100 @@
   </div>
 </section>
 
+<section class="biz-only">
+  <h2>Get Started</h2>
+  <p class="lead">Run a shop, studio or local service? Reach out and we’ll talk about which plan fits.</p>
+  <div style="text-align: center;">
+    <p><strong>Will Thompson</strong><br>
+    Phone: <a href="tel:+14174480176">(417) 448-0176</a><br>
+    Email: <a href="mailto:gospelsharepackage@gmail.com">gospelsharepackage@gmail.com</a></p>
+    <a class="btn" href="mailto:gospelsharepackage@gmail.com">Send a Message</a>
+  </div>
+</section>
+
 <footer>
-  <p>Sunday Sermon Media · Helping small churches share the gospel online</p>
-  <p style="margin-top: 0.5rem; opacity: 0.8;">Gospel first. Always.</p>
+  <p class="church-only">Sunday Sermon Media · Helping small churches share the gospel online</p>
+  <p class="biz-only">Small Business Media · from Sunday Sermon Media · Serving Nevada, MO and nearby towns</p>
+  <p class="church-only" style="margin-top: 0.5rem; opacity: 0.8;">Gospel first. Always.</p>
 </footer>
+<script>
+(function () {
+  var churchTitle = "Sunday Sermon Media | Help for Small Churches";
+  var businessTitle = "Small Business Media | Sunday Sermon Media";
+  var churchDesc = "Sunday Sermon Media helps small churches turn Sunday sermons into full videos, reels, and a simple website. Suggested $80/month or $40 small-church rate. Gospel first.";
+  var businessDesc = "Small Business Media from Sunday Sermon Media: a simple website, daily posts and reels for local businesses in Nevada, MO and nearby towns. Plans from $40 a month. First month free.";
+  var descTag = document.querySelector('meta[name="description"]');
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function modeFromHash() {
+    return (location.hash === "#business") ? "business" : "church";
+  }
+
+  function applyMode(mode) {
+    var next = (mode === "business") ? "business" : "church";
+    document.documentElement.setAttribute("data-mode", next);
+    document.body.setAttribute("data-mode", next);
+    document.title = (next === "business") ? businessTitle : churchTitle;
+    if (descTag) descTag.setAttribute("content", next === "business" ? businessDesc : churchDesc);
+  }
+
+  function syncHash(mode) {
+    var desired = (mode === "business") ? "#business" : "#church";
+    if (mode === "church" && (location.hash === "" || location.hash === "#")) {
+      return;
+    }
+    if (location.hash !== desired) {
+      if (history.replaceState) {
+        var url = location.pathname + location.search + (mode === "business" ? "#business" : "#church");
+        if (mode === "church") url = location.pathname + location.search;
+        history.replaceState(null, "", url);
+      } else {
+        location.hash = (mode === "business") ? "business" : "";
+      }
+    }
+  }
+
+  function setMode(mode, options) {
+    options = options || {};
+    var next = (mode === "business") ? "business" : "church";
+    var current = document.body.getAttribute("data-mode") || "church";
+    var instant = options.instant || reduceMotion || current === next;
+
+    function finish() {
+      applyMode(next);
+      if (options.updateHash !== false) syncHash(next);
+      document.body.classList.remove("is-fading");
+      if (options.scroll !== false && !instant && current !== next) {
+        window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      }
+    }
+
+    if (instant) {
+      finish();
+      return;
+    }
+
+    document.body.classList.add("is-fading");
+    setTimeout(finish, 280);
+  }
+
+  applyMode(modeFromHash());
+
+  window.addEventListener("hashchange", function () {
+    setMode(modeFromHash(), { updateHash: false, scroll: true });
+  });
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest('a[href="#business"], a[href="#church"]');
+    if (!link) return;
+    var mode = (link.getAttribute("href") === "#business") ? "business" : "church";
+    if (modeFromHash() === mode && (document.body.getAttribute("data-mode") || "church") === mode) {
+      return;
+    }
+    event.preventDefault();
+    setMode(mode, { updateHash: true, scroll: true });
+  });
+})();
+</script>
 </body>
 </html>

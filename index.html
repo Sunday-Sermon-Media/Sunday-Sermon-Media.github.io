@@ -5,93 +5,574 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Sunday Sermon Media helps small churches turn Sunday sermons into full videos, reels, and a simple website. Suggested $80/month or $40 small-church rate. Gospel first.">
 <title>Sunday Sermon Media | Help for Small Churches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,8..144,400;0,8..144,500;0,8..144,600;1,8..144,400;1,8..144,500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <script>
   document.documentElement.setAttribute("data-mode", location.hash === "#business" ? "business" : "church");
   if (location.hash === "#business") document.title = "Small Business Media | Sunday Sermon Media";
 </script>
 <style>
   :root {
-    --navy: #1a365d;
-    --gold: #c9a227;
-    --cream: #f8f5f0;
-    --text: #2d3748;
-    --muted: #718096;
+    --paper: #F7F3EB;
+    --paper-deep: #EDE6D8;
+    --surface: #FFFcf7;
+    --ink: #1C1914;
+    --ink-soft: #3A342C;
+    --muted: #6B6458;
+    --brand: #1F4E5F;
+    --brand-deep: #163944;
+    --gold: #D4B56A;
+    --gold-deep: #8A6A22;
+    --gold-btn: #C9A24C;
+    --clay: #C8553D;
+    --line: rgba(28, 25, 20, 0.12);
+    --line-strong: rgba(28, 25, 20, 0.2);
+    --display: "Newsreader", "Iowan Old Style", Palatino, Georgia, serif;
+    --sans: "Source Sans 3", "Source Sans Pro", system-ui, sans-serif;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); line-height: 1.6; background: var(--cream); transition: opacity 0.35s ease; }
+  html { scroll-padding-top: 4.5rem; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink-soft);
+    line-height: 1.65;
+    background: var(--paper);
+    font-size: 1.05rem;
+    font-weight: 400;
+    transition: opacity 0.35s ease;
+    -webkit-font-smoothing: antialiased;
+  }
   body.is-fading { opacity: 0; }
-  header { background: var(--navy); color: white; padding: 1.2rem 5%; text-align: center; }
-  header h1 { font-size: 1.6rem; }
-  .header-sub { font-size: 0.85rem; opacity: 0.85; margin-top: 0.2rem; }
-  .header-switch { display: inline-block; margin-top: 0.45rem; color: var(--gold); font-size: 0.85rem; font-weight: 600; text-decoration: none; }
-  .header-switch:hover { text-decoration: underline; }
-  .hero { background: linear-gradient(135deg, var(--navy) 0%, #2a4a7a 100%); color: white; text-align: center; padding: 4rem 5% 3rem; }
-  .hero h2 { font-size: 2.4rem; margin-bottom: 1rem; color: white; }
-  .hero p { font-size: 1.15rem; max-width: 680px; margin: 0 auto 1.5rem; }
-  .pull-quote { max-width: 640px; margin: 1.75rem auto 0; font-style: italic; font-size: 1.05rem; line-height: 1.7; color: #f8f5f0; border-left: 3px solid var(--gold); padding-left: 1.25rem; text-align: left; }
-  .pull-quote cite { display: block; margin-top: 0.6rem; font-style: normal; font-size: 0.9rem; color: var(--gold); letter-spacing: 0.02em; }
-  section { padding: 3.5rem 5%; max-width: 1000px; margin: 0 auto; }
-  section h2 { text-align: center; color: var(--navy); font-size: 1.8rem; margin-bottom: 0.5rem; }
-  .lead { text-align: center; color: var(--muted); margin-bottom: 2rem; }
+  h1, h2, h3, .pull-quote, .price, .step-num {
+    font-family: var(--display);
+    font-optical-sizing: auto;
+    color: var(--ink);
+  }
+  a { color: var(--brand); }
+  a:focus-visible, .btn:focus-visible, .btn-outline:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+  }
+
+  header {
+    background: rgba(247, 243, 235, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--ink);
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--line);
+  }
+  header::before {
+    content: "";
+    display: block;
+    height: 3px;
+    background: var(--gold-deep);
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 6%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  header h1 {
+    font-size: 1.45rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .header-sub {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+  .header-switch {
+    display: inline-block;
+    color: var(--brand);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(31, 78, 95, 0.35);
+    padding-bottom: 0.08rem;
+    white-space: nowrap;
+  }
+  .header-switch:hover { border-bottom-color: var(--brand); color: var(--brand-deep); }
+
+  .hero {
+    background: var(--paper);
+    color: var(--ink);
+    text-align: left;
+    padding: 4.6rem 6% 4.2rem;
+  }
+  .hero-grid {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 4rem;
+    align-items: end;
+  }
+  .hero h2 {
+    font-size: clamp(2.15rem, 4.5vw, 3.35rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 1.2rem;
+    max-width: 22ch;
+  }
+  .hero p {
+    font-size: 1.16rem;
+    max-width: 36rem;
+    margin: 0 0 1.15rem;
+    color: var(--ink-soft);
+  }
+  .hero-note { font-weight: 600; color: var(--ink); }
+  .hero-actions { margin: 0.35rem 0 0; }
+  .hero-actions .btn { margin: 0 0.7rem 0.55rem 0; }
+  .pull-quote {
+    margin: 0;
+    font-style: italic;
+    font-size: 1.28rem;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--clay);
+    padding: 0.15rem 0 0.15rem 1.4rem;
+    text-align: left;
+  }
+  .pull-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clay);
+  }
+
+  section { padding: 4.5rem 6%; max-width: 1120px; margin: 0 auto; }
+  section h2 {
+    text-align: left;
+    color: var(--ink);
+    font-size: clamp(1.85rem, 3vw, 2.45rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 0.65rem;
+  }
+  .lead {
+    text-align: left;
+    color: var(--muted);
+    margin-bottom: 2.1rem;
+    max-width: 38rem;
+    font-size: 1.08rem;
+  }
+  .work-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    margin: 0 0 0.4rem;
+  }
+  .work-title {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: left;
+    margin: 0 0 1rem;
+  }
+
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-  .card { background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .card h3 { color: var(--navy); margin-bottom: 0.5rem; }
-  .card ul { margin: 0.75rem 0 0 1.15rem; }
+  .features {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+    border-left: 1px solid var(--line-strong);
+  }
+  .features .card {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    border-right: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    padding: 1.7rem 1.45rem 1.8rem;
+  }
+  .card { background: var(--surface); padding: 1.5rem 1.45rem 1.6rem; border-radius: 0; box-shadow: none; }
+  .card h3 {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 1.28rem;
+    margin-bottom: 0.45rem;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+  .card ul { margin: 0.85rem 0 0 1.1rem; }
   .card li { margin-bottom: 0.35rem; }
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center; margin-top: 1.5rem; }
-  .step { background: white; padding: 1.5rem; border-radius: 10px; }
-  .step-num { display: inline-block; background: var(--gold); color: var(--navy); width: 2.2rem; height: 2.2rem; line-height: 2.2rem; border-radius: 50%; font-weight: 700; margin-bottom: 0.5rem; }
-  .price { font-size: 1.8rem; font-weight: 700; color: var(--navy); }
-  .full-width { background: white; }
-  .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; margin: 1rem 0; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    text-align: left;
+    margin-top: 2.4rem;
+  }
+  .step {
+    background: transparent;
+    padding: 0 2.1rem 0 0;
+    border-radius: 0;
+    border-right: 1px solid var(--line-strong);
+  }
+  .step:last-child { border-right: 0; padding-right: 0; }
+  .step + .step { padding-left: 2.1rem; }
+  .step-num {
+    display: block;
+    background: none;
+    color: var(--brand);
+    width: auto;
+    height: auto;
+    line-height: 1;
+    border-radius: 0;
+    font-weight: 500;
+    font-size: 2.7rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.7rem;
+  }
+  .step h3 {
+    font-size: 1.28rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  .price {
+    font-size: 2.55rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+    margin: 0.4rem 0 0.8rem;
+  }
+  .price-period {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  .full-width { background: var(--surface); }
+  .band-soft { background: var(--paper-deep); }
+  .band-ink { background: var(--brand); color: #F4EFE6; }
+  .band-ink h2, .band-ink .card h3 { color: #FFFcf7; }
+  .band-ink .lead { color: rgba(247, 243, 235, 0.84); }
+  .band-ink .lead strong { color: #FFFcf7; }
+  .band-ink .price { color: #FFFcf7; }
+  .band-ink .price-period { color: rgba(247, 243, 235, 0.75); }
+  .band-ink .card {
+    background: transparent;
+    border: 1px solid rgba(247, 243, 235, 0.2);
+    color: #F4EFE6;
+  }
+  .band-ink .card-featured {
+    background: var(--paper);
+    color: var(--ink-soft);
+    border-color: var(--paper);
+  }
+  .band-ink .card-featured h3,
+  .band-ink .card-featured .price { color: var(--ink); }
+  .band-ink .card-featured .price-period { color: var(--muted); }
+  .band-ink .callout { border-top-color: rgba(212, 181, 106, 0.45); }
+  .band-ink .callout h3 { color: var(--gold); }
+  .band-ink .callout p { color: #F4EFE6; }
+  .band-ink .btn-outline { color: #FFFcf7; border-color: var(--gold); }
+  .band-ink .btn-outline:hover { background: rgba(212, 181, 106, 0.14); color: #FFFcf7; }
+  .card-featured { box-shadow: inset 0 3px 0 var(--gold-deep); }
+
+  .video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 0;
+    margin: 0.4rem 0 1rem;
+    border: 1px solid var(--line-strong);
+    background: #111;
+  }
   .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-  .shorts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-  .short-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-decoration: none; color: inherit; }
-  .short-card img { width: 100%; height: auto; display: block; }
-  .short-card p { padding: 0.75rem; font-size: 0.9rem; font-weight: 600; color: var(--navy); text-align: center; }
-  footer { background: var(--navy); color: white; text-align: center; padding: 2rem 5%; font-size: 0.9rem; }
-  .btn { display: inline-block; background: var(--gold); color: var(--navy); padding: 0.8rem 1.6rem; border-radius: 6px; font-weight: 600; margin-top: 1rem; text-decoration: none; }
-  .btn:hover { background: #d4af37; }
-  .btn-outline { display: inline-block; background: transparent; border: 2px solid var(--gold); color: var(--navy); padding: 0.45rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; margin-top: 0.7rem; text-decoration: none; cursor: pointer; font-family: inherit; }
-  .btn-outline:hover { background: rgba(201,162,39,0.15); }
-  .hero .btn-outline { color: white; }
-  .callout { max-width: 640px; margin: 2rem auto 0; padding: 1rem 1.2rem; text-align: center; border: 1px solid rgba(26,54,93,0.15); border-radius: 8px; background: var(--cream); }
-  .callout h3 { color: var(--navy); font-size: 1.05rem; margin-bottom: 0.3rem; }
-  .callout p { color: var(--muted); font-size: 0.95rem; margin: 0 auto; max-width: 560px; }
-  .callout-hero { margin: 2rem auto 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(201,162,39,0.45); }
-  .callout-hero h3 { color: var(--gold); }
-  .callout-hero p { color: #f8f5f0; font-size: 0.95rem; }
+  .work-link { margin: 0 0 2.2rem; }
+  .shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  .short-card {
+    background: transparent;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+    text-decoration: none;
+    color: inherit;
+  }
+  .short-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--line-strong);
+  }
+  .short-card p {
+    padding: 0.65rem 0 0;
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: left;
+    line-height: 1.3;
+  }
+  .short-card:hover img { opacity: 0.86; }
+
+  .faq-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+  }
+  .faq-grid .card {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 1.45rem 1.4rem 1.5rem 0;
+  }
+
+  .who-section .lead {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 38rem;
+    text-align: left;
+  }
+
+  .measure { max-width: 38rem; margin: 1.35rem 0 0; text-align: left; }
+  .measure-muted { color: var(--muted); }
+  .cta-row { margin-top: 1.6rem; }
+  .contact-letter {
+    text-align: left;
+    max-width: 28rem;
+  }
+  .contact-letter p { margin-bottom: 0.3rem; }
+  .work-cta { margin: 0 0 2.4rem; }
+
+  footer {
+    background: var(--brand-deep);
+    color: #EDE6D8;
+    text-align: left;
+    padding: 2.4rem 6% 2.6rem;
+    font-size: 0.95rem;
+  }
+  .footer-inner { max-width: 1120px; margin: 0 auto; }
+  footer .tagline {
+    margin-top: 0.45rem;
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--gold);
+    opacity: 1;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--gold-btn);
+    color: var(--ink);
+    padding: 0.82rem 1.45rem;
+    border-radius: 2px;
+    font-weight: 600;
+    font-family: var(--sans);
+    margin-top: 1rem;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: background 0.2s ease, transform 0.2s var(--ease);
+  }
+  .btn:hover { background: #d4af55; }
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    border: 1.5px solid var(--gold-deep);
+    color: var(--ink);
+    padding: 0.48rem 1rem;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-top: 0.75rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease;
+  }
+  .btn-outline:hover { background: rgba(138, 106, 34, 0.1); }
+  .hero .btn-outline { color: var(--ink); }
+
+  .callout {
+    max-width: none;
+    margin: 2.4rem 0 0;
+    padding: 1.4rem 0 0;
+    text-align: left;
+    border: none;
+    border-top: 1px solid var(--line-strong);
+    background: transparent;
+    border-radius: 0;
+  }
+  .callout h3 {
+    font-family: var(--display);
+    color: var(--ink);
+    font-size: 1.28rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.015em;
+  }
+  .callout p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin: 0;
+    max-width: 36rem;
+  }
+  .callout-hero {
+    max-width: 1120px;
+    margin: 3rem auto 0;
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--line-strong);
+  }
+  .callout-hero h3 { color: var(--ink); }
+  .callout-hero p { color: var(--ink-soft); font-size: 1rem; }
+  .hero-aside {
+    border-left: 2px solid var(--gold-deep);
+    padding: 0.2rem 0 0.2rem 1.4rem;
+    margin: 0;
+    align-self: end;
+  }
+  .hero-aside.callout { border-top: 0; padding-top: 0.2rem; margin-top: 0; }
+
   html:not([data-mode="business"]) .biz-only { display: none !important; }
   html[data-mode="business"] .church-only { display: none !important; }
+
+  .js-anim .reveal {
+    opacity: 0;
+    transform: translateY(1.15rem);
+    transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+  }
+  .js-anim .reveal.is-in { opacity: 1; transform: none; }
+  .js-anim .steps .step { opacity: 0; transform: translateY(1.15rem); transition: opacity 0.75s var(--ease), transform 0.75s var(--ease); }
+  .js-anim .steps.is-in .step { opacity: 1; transform: none; }
+  .js-anim .steps.is-in .step:nth-child(2) { transition-delay: 0.1s; }
+  .js-anim .steps.is-in .step:nth-child(3) { transition-delay: 0.2s; }
+  .js-anim .features .card,
+  .js-anim .faq-grid .card,
+  .js-anim .grid .card,
+  .js-anim .shorts-grid .short-card {
+    opacity: 0;
+    transform: translateY(0.9rem);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+  .js-anim .features.is-in .card,
+  .js-anim .faq-grid.is-in .card,
+  .js-anim .grid.is-in .card,
+  .js-anim .shorts-grid.is-in .short-card { opacity: 1; transform: none; }
+  .js-anim .features.is-in .card:nth-child(2),
+  .js-anim .faq-grid.is-in .card:nth-child(2),
+  .js-anim .grid.is-in .card:nth-child(2),
+  .js-anim .shorts-grid.is-in .short-card:nth-child(2) { transition-delay: 0.08s; }
+  .js-anim .features.is-in .card:nth-child(3),
+  .js-anim .faq-grid.is-in .card:nth-child(3),
+  .js-anim .grid.is-in .card:nth-child(3),
+  .js-anim .shorts-grid.is-in .short-card:nth-child(3) { transition-delay: 0.16s; }
+  .js-anim .features.is-in .card:nth-child(4),
+  .js-anim .faq-grid.is-in .card:nth-child(4),
+  .js-anim .grid.is-in .card:nth-child(4),
+  .js-anim .shorts-grid.is-in .short-card:nth-child(4) { transition-delay: 0.24s; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+    .hero-aside { align-self: stretch; border-left: 0; padding: 1.4rem 0 0; border-top: 1px solid var(--line-strong); }
+    .hero-aside.callout { padding-top: 1.4rem; }
+    .shorts-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: 1fr; }
+    .step, .step + .step { padding: 1.35rem 0; border-right: 0; border-bottom: 1px solid var(--line); }
+    .step:first-child { padding-top: 0; }
+    .step:last-child { border-bottom: 0; padding-bottom: 0; }
+  }
   @media (max-width: 600px) {
-    .hero h2 { font-size: 1.9rem; }
-    .hero { padding: 2.5rem 5% 2.25rem; }
-    .btn { margin: 0.4rem 0.25rem 0; }
+    .hero h2 { font-size: 2.05rem; max-width: none; }
+    .hero { padding: 2.6rem 5.5% 2.6rem; }
+    .header-inner, section, footer { padding-left: 5.5%; padding-right: 5.5%; }
+    section { padding-top: 3.1rem; padding-bottom: 3.1rem; }
+    header h1 { font-size: 1.22rem; }
+    .hero-actions .btn { display: block; width: 100%; text-align: center; margin: 0 0 0.6rem; }
+    .features { border-left: 0; grid-template-columns: 1fr; }
+    .features .card { border-right: 0; padding-left: 0; padding-right: 0; }
+    .faq-grid { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
     body { transition: none; }
+    .js-anim .reveal,
+    .js-anim .steps .step,
+    .js-anim .features .card,
+    .js-anim .faq-grid .card,
+    .js-anim .grid .card,
+    .js-anim .shorts-grid .short-card {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
   }
 </style>
 </head>
 <body data-mode="church">
 <header>
-  <h1 class="church-only">Sunday Sermon Media</h1>
-  <h1 class="biz-only">Small Business Media</h1>
-  <p class="header-sub biz-only">from Sunday Sermon Media</p>
-  <a class="header-switch church-only" href="#business">For local businesses</a>
-  <a class="header-switch biz-only" href="#church">For churches</a>
+  <div class="header-inner">
+    <div class="brand">
+      <h1 class="church-only">Sunday Sermon Media</h1>
+      <h1 class="biz-only">Small Business Media</h1>
+      <p class="header-sub biz-only">from Sunday Sermon Media</p>
+    </div>
+    <a class="header-switch church-only" href="#business">For local businesses</a>
+    <a class="header-switch biz-only" href="#church">For churches</a>
+  </div>
 </header>
 
 <section class="hero church-only">
-  <h2>Helping Small Churches Share the Gospel Online</h2>
-  <p>We turn your Sunday sermons into ready-to-post videos, reels, and a simple website so more people can hear the Word.</p>
-  <p style="font-weight:600;">Serving Nevada, MO and nearby towns. Most small churches start at $40 a month, and your first month is free.</p>
-  <p><a class="btn" href="tel:+14174480176">Call to talk: (417) 448-0176</a> <a class="btn" href="mailto:gospelsharepackage@gmail.com">Email us</a></p>
-  <blockquote class="pull-quote">
-    “How then shall they call on him in whom they have not believed? and how shall they believe in him of whom they have not heard? and how shall they hear without a preacher?”
-    <cite>Romans 10:14 (KJV)</cite>
-  </blockquote>
-  <div class="callout callout-hero">
+  <div class="hero-grid">
+    <div class="hero-copy reveal">
+      <h2>Helping Small Churches Share the Gospel Online</h2>
+      <p>We turn your Sunday sermons into ready-to-post videos, reels, and a simple website so more people can hear the Word.</p>
+      <p class="hero-note">Serving Nevada, MO and nearby towns. Most small churches start at $40 a month, and your first month is free.</p>
+      <p class="hero-actions"><a class="btn" href="tel:+14174480176">Call to talk: (417) 448-0176</a> <a class="btn" href="mailto:gospelsharepackage@gmail.com">Email us</a></p>
+    </div>
+    <blockquote class="pull-quote reveal">
+      “How then shall they call on him in whom they have not believed? and how shall they believe in him of whom they have not heard? and how shall they hear without a preacher?”
+      <cite>Romans 10:14 (KJV)</cite>
+    </blockquote>
+  </div>
+  <div class="callout callout-hero reveal">
     <h3>Run a local business?</h3>
     <p>We'll keep your business in front of customers too: a simple website, daily posts and reels.</p>
     <a class="btn-outline" href="#business">See Small Business Media</a>
@@ -99,20 +580,24 @@
 </section>
 
 <section class="hero biz-only">
-  <h2>We'll Keep Your Business in Front of Customers</h2>
-  <p>A simple website, daily posts and reels, made from photos and video you send.</p>
-  <p style="font-weight:600;">Serving Nevada, MO and nearby towns. First month free on every plan.</p>
-  <p><a class="btn" href="tel:+14174480176">Call to talk: (417) 448-0176</a> <a class="btn" href="mailto:gospelsharepackage@gmail.com">Email us</a></p>
-  <div class="callout callout-hero">
-    <h3>Looking for church media?</h3>
-    <p>We also help small churches turn Sunday sermons into videos, reels and a simple website.</p>
-    <a class="btn-outline" href="#church">See Church Media</a>
+  <div class="hero-grid">
+    <div class="hero-copy reveal">
+      <h2>We'll Keep Your Business in Front of Customers</h2>
+      <p>A simple website, daily posts and reels, made from photos and video you send.</p>
+      <p class="hero-note">Serving Nevada, MO and nearby towns. First month free on every plan.</p>
+      <p class="hero-actions"><a class="btn" href="tel:+14174480176">Call to talk: (417) 448-0176</a> <a class="btn" href="mailto:gospelsharepackage@gmail.com">Email us</a></p>
+    </div>
+    <div class="callout callout-hero hero-aside reveal">
+      <h3>Looking for church media?</h3>
+      <p>We also help small churches turn Sunday sermons into videos, reels and a simple website.</p>
+      <a class="btn-outline" href="#church">See Church Media</a>
+    </div>
   </div>
 </section>
 
 <section class="church-only">
-  <h2>How It Works</h2>
-  <div class="steps">
+  <h2 class="reveal">How It Works</h2>
+  <div class="steps reveal">
     <div class="step">
       <div class="step-num">1</div>
       <h3>Send us your livestream link</h3>
@@ -132,8 +617,8 @@
 </section>
 
 <section class="biz-only">
-  <h2>How It Works</h2>
-  <div class="steps">
+  <h2 class="reveal">How It Works</h2>
+  <div class="steps reveal">
     <div class="step">
       <div class="step-num">1</div>
       <h3>Send photos and video</h3>
@@ -152,9 +637,10 @@
   </div>
 </section>
 
-<section class="church-only">
-  <h2>What You Get Each Month</h2>
-  <div class="grid">
+<div class="full-width band-soft church-only">
+<section>
+  <h2 class="reveal">What You Get Each Month</h2>
+  <div class="grid features reveal">
     <div class="card">
       <h3>Full Sermon Video</h3>
       <p>Your livestream or recording is trimmed to the sermon and given a clear title and scripture. We deliver the finished video ready for you to post on YouTube and Facebook. Posting for you is available as an optional add-on.</p>
@@ -173,11 +659,13 @@
     </div>
   </div>
 </section>
+</div>
 
-<section class="biz-only">
-  <h2>What You Get</h2>
-  <p class="lead">Everything is made from photos and video you send. No fancy shoot required.</p>
-  <div class="grid">
+<div class="full-width band-soft biz-only">
+<section>
+  <h2 class="reveal">What You Get</h2>
+  <p class="lead reveal">Everything is made from photos and video you send. No fancy shoot required.</p>
+  <div class="grid features reveal">
     <div class="card">
       <h3>Simple Website</h3>
       <p>A clean one-page site for your business, with updates when you need them on the Growth and Full plans.</p>
@@ -196,26 +684,27 @@
     </div>
   </div>
 </section>
+</div>
 
-<div class="full-width church-only">
+<div class="full-width band-ink church-only">
   <section>
-    <h2>Pricing</h2>
-    <p class="lead"><strong>Your first month is free.</strong> Send us one recent sermon and we'll make it for you, so you can see the work before you pay anything. After that, no contract. Cancel anytime. Our number one priority is that the gospel is shared.</p>
+    <h2 class="reveal">Pricing</h2>
+    <p class="lead reveal"><strong>Your first month is free.</strong> Send us one recent sermon and we'll make it for you, so you can see the work before you pay anything. After that, no contract. Cancel anytime. Our number one priority is that the gospel is shared.</p>
 
-    <div class="grid">
-      <div class="card" style="border: 2px solid var(--gold);">
+    <div class="grid reveal">
+      <div class="card card-featured">
         <h3>Standard</h3>
-        <p class="price">$80 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <p class="price">$80 <span class="price-period">/ month</span></p>
         <p>Full package: website help, full sermon video, and 4–8 reels/shorts.</p>
       </div>
       <div class="card">
         <h3>Small-church rate</h3>
-        <p class="price">$40 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <p class="price">$40 <span class="price-period">/ month</span></p>
         <p>Same package. Available for churches where $80 is a stretch.</p>
       </div>
     </div>
 
-    <div class="callout">
+    <div class="callout reveal">
       <h3>Run a local business?</h3>
       <p>We'll keep your business in front of customers too: a simple website, daily posts and reels.</p>
       <a class="btn-outline" href="#business">See Small Business Media</a>
@@ -223,24 +712,24 @@
   </section>
 </div>
 
-<div class="full-width biz-only">
+<div class="full-width band-ink biz-only">
   <section>
-    <h2>Pricing</h2>
-    <p class="lead"><strong>Your first month is free</strong> on every plan. Content is made from photos and video you send. Serving Nevada, MO and nearby towns. No contract. Cancel anytime.</p>
+    <h2 class="reveal">Pricing</h2>
+    <p class="lead reveal"><strong>Your first month is free</strong> on every plan. Content is made from photos and video you send. Serving Nevada, MO and nearby towns. No contract. Cancel anytime.</p>
 
-    <div class="grid">
+    <div class="grid reveal">
       <div class="card">
         <h3>Starter</h3>
-        <p class="price">$40 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <p class="price">$40 <span class="price-period">/ month</span></p>
         <ul>
           <li>Simple one-page website</li>
           <li>3 Facebook posts a week</li>
           <li>First month free</li>
         </ul>
       </div>
-      <div class="card" style="border: 2px solid var(--gold);">
+      <div class="card card-featured">
         <h3>Growth</h3>
-        <p class="price">$80 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <p class="price">$80 <span class="price-period">/ month</span></p>
         <ul>
           <li>Website</li>
           <li>Daily posts</li>
@@ -251,7 +740,7 @@
       </div>
       <div class="card">
         <h3>Full</h3>
-        <p class="price">$120 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+        <p class="price">$120 <span class="price-period">/ month</span></p>
         <ul>
           <li>Website</li>
           <li>Daily posts</li>
@@ -262,7 +751,7 @@
       </div>
     </div>
 
-    <div class="callout">
+    <div class="callout reveal">
       <h3>Looking for church media?</h3>
       <p>We also help small churches share Sunday sermons online, with videos, reels and a simple website.</p>
       <a class="btn-outline" href="#church">See Church Media</a>
@@ -271,51 +760,52 @@
 </div>
 
 <section id="sponsor" class="church-only">
-  <h2>Sponsor a Church</h2>
-  <p class="lead">If a church you care about could use help sharing the gospel online, you can cover their media for them.</p>
+  <h2 class="reveal">Sponsor a Church</h2>
+  <p class="lead reveal">If a church you care about could use help sharing the gospel online, you can cover their media for them.</p>
 
-  <div class="grid">
-    <div class="card" style="border: 2px solid var(--gold);">
+  <div class="grid reveal">
+    <div class="card card-featured">
       <h3>Standard</h3>
-      <p class="price">$80 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+      <p class="price">$80 <span class="price-period">/ month</span></p>
       <p>Covers a church at the standard rate.</p>
     </div>
     <div class="card">
       <h3>Small-church rate</h3>
-      <p class="price">$40 <span style="font-size: 1rem; font-weight: normal;">/ month</span></p>
+      <p class="price">$40 <span class="price-period">/ month</span></p>
       <p>Covers a church at the small-church rate.</p>
     </div>
   </div>
 
-  <p style="max-width: 680px; margin: 1.5rem auto 0; text-align: center;">You can name a specific church, or ask us to put it wherever it's needed most. In that case, we'll choose a church that couldn't otherwise afford it.</p>
+  <p class="measure reveal">You can name a specific church, or ask us to put it wherever it's needed most. In that case, we'll choose a church that couldn't otherwise afford it.</p>
 
-  <p style="max-width: 680px; margin: 1rem auto 0; text-align: center;">Sponsorships are anonymous by design. We won't put a name on the website, in the videos, or in the descriptions, because recognition shouldn't be the reason to give. The church is only told that someone covered their media.</p>
+  <p class="measure reveal">Sponsorships are anonymous by design. We won't put a name on the website, in the videos, or in the descriptions, because recognition shouldn't be the reason to give. The church is only told that someone covered their media.</p>
 
-  <p style="max-width: 680px; margin: 1rem auto 0; text-align: center; color: var(--muted);">Sunday Sermon Media is not a nonprofit, so sponsorships are not tax-deductible. No contract. Cancel anytime. Pay by Square invoice or check.</p>
+  <p class="measure measure-muted reveal">Sunday Sermon Media is not a nonprofit, so sponsorships are not tax-deductible. No contract. Cancel anytime. Pay by Square invoice or check.</p>
 
-  <div style="text-align: center;">
+  <div class="cta-row reveal">
     <a class="btn" href="tel:+14174480176">Call to talk: (417) 448-0176</a> <a class="btn" href="mailto:gospelsharepackage@gmail.com?subject=Sponsor%20a%20Church">Email us</a>
   </div>
 </section>
 
 
-<section class="church-only">
-  <h2>Our Work: Cornerstone Baptist Church</h2>
-  <p class="lead">Nevada, Missouri</p>
+<div class="full-width band-soft church-only">
+<section>
+  <h2 class="reveal">Our Work: Cornerstone Baptist Church</h2>
+  <p class="lead reveal">Nevada, Missouri</p>
 
-  <div style="text-align: center; margin-bottom: 2rem;">
+  <div class="work-cta reveal">
     <a class="btn" href="https://cornerstonebaptistchurchnevadamo.grok.me/" target="_blank">View the church website</a>
   </div>
 
-  <h3 style="text-align: center; color: var(--navy); margin-bottom: 0.5rem;">Latest Full Sermon</h3>
-  <p style="text-align: center; margin-bottom: 1rem;">The Once And Future King — Matthew 26:47-56</p>
-  <div class="video-wrap">
+  <h3 class="work-label reveal">Latest Full Sermon</h3>
+  <p class="work-title reveal">The Once And Future King — Matthew 26:47-56</p>
+  <div class="video-wrap reveal">
     <iframe src="https://www.youtube.com/embed/06ZmvUZCMLY" title="The Once And Future King" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
-  <p style="text-align: center; margin-bottom: 2rem;"><a href="https://www.facebook.com/reel/1805771894037778/" target="_blank">Watch on Facebook</a></p>
+  <p class="work-link reveal"><a href="https://www.facebook.com/reel/1805771894037778/" target="_blank">Watch on Facebook</a></p>
 
-  <h3 style="text-align: center; color: var(--navy); margin-bottom: 1rem;">Sermon Shorts</h3>
-  <div class="shorts-grid">
+  <h3 class="work-label reveal">Sermon Shorts</h3>
+  <div class="shorts-grid reveal">
     <a class="short-card" href="https://youtube.com/shorts/tw1EYzop21M" target="_blank">
       <img src="https://i.ytimg.com/vi/tw1EYzop21M/hqdefault.jpg" alt="No Other Way">
       <p>No Other Way</p>
@@ -334,23 +824,24 @@
     </a>
   </div>
 
-  <p class="lead" style="margin-top: 2rem;">Every week: full sermon on YouTube and Facebook, 4–8 captioned shorts on YouTube Shorts, Facebook Reels and TikTok, plus a website kept current.</p>
-  <p style="text-align: center;"><a href="https://www.tiktok.com/@cornerstonebabtis0" target="_blank">TikTok: @cornerstonebabtis0</a></p>
+  <p class="lead reveal" style="margin-top: 2rem;">Every week: full sermon on YouTube and Facebook, 4–8 captioned shorts on YouTube Shorts, Facebook Reels and TikTok, plus a website kept current.</p>
+  <p class="reveal"><a href="https://www.tiktok.com/@cornerstonebabtis0" target="_blank">TikTok: @cornerstonebabtis0</a></p>
+</section>
+</div>
+
+<section class="who-section church-only">
+  <h2 class="reveal">Who We Are</h2>
+  <p class="lead reveal">We do this kind of media and website work for small churches. The goal is to help congregations get gospel-sharing tools online without a high price tag.</p>
+</section>
+
+<section class="who-section biz-only">
+  <h2 class="reveal">Who We Are</h2>
+  <p class="lead reveal">Sunday Sermon Media also helps local businesses in Nevada, MO and nearby towns stay in front of customers with a simple website, regular posts and reels — without a high price tag.</p>
 </section>
 
 <section class="church-only">
-  <h2>Who We Are</h2>
-  <p class="lead">We do this kind of media and website work for small churches. The goal is to help congregations get gospel-sharing tools online without a high price tag.</p>
-</section>
-
-<section class="biz-only">
-  <h2>Who We Are</h2>
-  <p class="lead">Sunday Sermon Media also helps local businesses in Nevada, MO and nearby towns stay in front of customers with a simple website, regular posts and reels — without a high price tag.</p>
-</section>
-
-<section class="church-only">
-  <h2>FAQ</h2>
-  <div class="grid">
+  <h2 class="reveal">FAQ</h2>
+  <div class="grid faq-grid reveal">
     <div class="card">
       <h3>What equipment do we need?</h3>
       <p>None. A phone livestream works. We can work with whatever you already use.</p>
@@ -371,8 +862,8 @@
 </section>
 
 <section class="biz-only">
-  <h2>FAQ</h2>
-  <div class="grid">
+  <h2 class="reveal">FAQ</h2>
+  <div class="grid faq-grid reveal">
     <div class="card">
       <h3>What do I need to send?</h3>
       <p>Photos and short videos from your phone are enough, or a quick walkthrough of your business. We make the website, posts and reels from that.</p>
@@ -393,9 +884,9 @@
 </section>
 
 <section class="church-only">
-  <h2>Get Started</h2>
-  <p class="lead">Interested in the Sunday Sermon Media package for your church? Reach out and we’ll talk about what would help most.</p>
-  <div style="text-align: center;">
+  <h2 class="reveal">Get Started</h2>
+  <p class="lead reveal">Interested in the Sunday Sermon Media package for your church? Reach out and we’ll talk about what would help most.</p>
+  <div class="contact-letter reveal">
     <p><strong>Will Thompson</strong><br>
     Phone: <a href="tel:+14174480176">(417) 448-0176</a><br>
     Email: <a href="mailto:gospelsharepackage@gmail.com">gospelsharepackage@gmail.com</a></p>
@@ -404,9 +895,9 @@
 </section>
 
 <section class="biz-only">
-  <h2>Get Started</h2>
-  <p class="lead">Run a shop, studio or local service? Reach out and we’ll talk about which plan fits.</p>
-  <div style="text-align: center;">
+  <h2 class="reveal">Get Started</h2>
+  <p class="lead reveal">Run a shop, studio or local service? Reach out and we’ll talk about which plan fits.</p>
+  <div class="contact-letter reveal">
     <p><strong>Will Thompson</strong><br>
     Phone: <a href="tel:+14174480176">(417) 448-0176</a><br>
     Email: <a href="mailto:gospelsharepackage@gmail.com">gospelsharepackage@gmail.com</a></p>
@@ -415,9 +906,11 @@
 </section>
 
 <footer>
-  <p class="church-only">Sunday Sermon Media · Helping small churches share the gospel online</p>
-  <p class="biz-only">Small Business Media · from Sunday Sermon Media · Serving Nevada, MO and nearby towns</p>
-  <p class="church-only" style="margin-top: 0.5rem; opacity: 0.8;">Gospel first. Always.</p>
+  <div class="footer-inner">
+    <p class="church-only">Sunday Sermon Media · Helping small churches share the gospel online</p>
+    <p class="biz-only">Small Business Media · from Sunday Sermon Media · Serving Nevada, MO and nearby towns</p>
+    <p class="church-only tagline">Gospel first. Always.</p>
+  </div>
 </footer>
 <script>
 (function () {
@@ -456,6 +949,39 @@
     }
   }
 
+  var io = null;
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    document.documentElement.classList.add("js-anim");
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+  }
+
+  function isHidden(el) {
+    var node = el;
+    while (node && node !== document.documentElement) {
+      if (window.getComputedStyle(node).display === "none") return true;
+      node = node.parentElement;
+    }
+    return false;
+  }
+
+  function syncReveals(forceIn) {
+    document.querySelectorAll(".reveal").forEach(function (el) {
+      if (isHidden(el)) return;
+      if (reduceMotion || forceIn || !io) {
+        el.classList.add("is-in");
+      } else if (!el.classList.contains("is-in")) {
+        io.observe(el);
+      }
+    });
+  }
+
   function setMode(mode, options) {
     options = options || {};
     var next = (mode === "business") ? "business" : "church";
@@ -466,6 +992,7 @@
       applyMode(next);
       if (options.updateHash !== false) syncHash(next);
       document.body.classList.remove("is-fading");
+      if (current !== next) syncReveals(true);
       if (options.scroll !== false && !instant && current !== next) {
         window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
       }
@@ -481,6 +1008,7 @@
   }
 
   applyMode(modeFromHash());
+  syncReveals(false);
 
   window.addEventListener("hashchange", function () {
     setMode(modeFromHash(), { updateHash: false, scroll: true });
